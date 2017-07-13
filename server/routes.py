@@ -1,5 +1,5 @@
 from . import api
-import controllers.sample
+import controllers.merchant
 
 def add_routes():
-    api.add_resource(controllers.sample.SampleController, '/')
+    api.add_resource(controllers.merchant.MerchantController, '/merchant/<int:id>')
