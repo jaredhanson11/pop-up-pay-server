@@ -1,7 +1,9 @@
 from . import db
 
-class Mercant(db.Model):
+class Merchant(db.Model):
+     __tablename__ = 'merchant'
+
     id          = db.Column(db.String(1000))
     name        = db.Column(db.String(50))
-    menu        = db.relationship('Menu', backref='merchant', lazy='dynamic')
-    reciepts    = db.relationship('Menu', backref='merchant', lazy='dynamic')
+    menu        = db.relationship('MenuItem', backref='merchant', lazy='dynamic')
+    reciepts    = db.relationship('Reciept', backref='merchant', lazy='dynamic')
