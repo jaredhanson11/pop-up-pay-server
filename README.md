@@ -1,27 +1,14 @@
 # Pop Up Shop Server
 
 ## Endpoints
-| Endpoint | Parameters | Response |
-|   ---    |     ---    |   ---    |
-| GET `/merchant/<int:merchant_id>` | n/a | `{'merchant': {'id': `<string>`, 'name': `<string>`, 'menu': [<menu_items>], 'receipt': [<receipt_items>]` |
+- Client purchases menu items from merchant id
+GET `/purchase/<client_id>/<merchant_id>/<transaction_id>?<menu_item_id>=<quantity>&...`
 
-## Objects
-menu_item:
-```json
-{
-    'id': <int>,
-    'price': <float>,
-    'merchant_id': <string>
-}
-```
+- Client gets receipts
+GET `/customers/<client_id>`
 
-receipt_item:
-```json
-{
-  'id': <int>,
-  'datetime': <datetime>,
-  'items': [<menu_items>...]
-  'merchant_id': <string>
-}
-```
+- Merchant gets menu items and receipts
+GET `/merchant/<merchant_id>`
 
+- Merchant checks if transaction is complete
+GET `/transactions/<transaction_id>`

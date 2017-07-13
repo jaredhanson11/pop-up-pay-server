@@ -42,3 +42,9 @@ class ClientBuyController(Resource):
         Transaction.create(transaction_id)
         return responses.success({'purchased': purchased, 'error': error})
 
+class ClientHomeController(Resource):
+    def get(self, client_id):
+        client_obj = Client.query.get(client_id)
+        if client_obj == None:
+            return responses.error({'error': 'No client for id: %s' % client_id})
+        return responses.success({'client': client_obj.to_json()})

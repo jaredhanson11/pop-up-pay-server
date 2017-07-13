@@ -7,6 +7,14 @@ class Client(db.Model):
     name = db.Column(db.String(50))
     receipts = db.relationship('Receipt', backref='client', lazy='dynamic')
 
+    def to_json(self):
+        ret = {
+            'id': self.id,
+            'name': self.name,
+            'receipts': map(lambda receipt: receipt.to_json(), self.receipts)
+        }
+        return ret
+
     @staticmethod
     def create(name):
         new_client = Client(name=name)
