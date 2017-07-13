@@ -1,4 +1,4 @@
-from . import db
+from .. import db
 
 class MenuItem(db.Model):
     __tablename__ = 'menu_item'
@@ -15,3 +15,16 @@ class MenuItem(db.Model):
             'price': self.price,
             'merchant_id': self.merchant_id
         }
+        return ret
+
+    @staticmethod
+    def create(name, price, merchant_id):
+        new_item = MenuItem(name=name, price=price, merchant_id=merchant_id)
+        db.session.add(new_item)
+        try:
+            db.session.commit()
+            return new_item
+        except Exception, e:
+            print e
+            db.session.rollback()
+            return None

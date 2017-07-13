@@ -1,2 +1,6 @@
 # This import gives all our models access to the same db object
-from .. import db
+import menu_item
+import merchant
+import receipt_item
+import client
+import receipt

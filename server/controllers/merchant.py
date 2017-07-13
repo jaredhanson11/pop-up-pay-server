@@ -10,7 +10,10 @@ class MerchantController(Resource):
         '''
         Returns all the current records.
         '''
-        merchant = Merchant.get(id)
-        merchant_json = merchant.to_json()
-        return responses.success({'merchant': merchant_json})
+        merchant_obj = Merchant.query.get(id)
+        if merchant_obj:
+            merchant_json = merchant_obj.to_json()
+            return responses.success({'merchant': merchant_json})
+        else:
+            return responses.error({'error': 'No merchant for id: \'%s\'' % id})
 

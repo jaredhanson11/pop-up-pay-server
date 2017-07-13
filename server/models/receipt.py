@@ -1,4 +1,4 @@
-from . import db
+from .. import db
 
 class Receipt(db.Model):
     __tablename__ = 'receipt'
@@ -7,7 +7,7 @@ class Receipt(db.Model):
     datetime = db.Column(db.DateTime, server_default=db.func.now())
     merchant_id = db.Column(db.String(1000), db.ForeignKey('merchant.id'))
     client_id = db.Column(db.Integer, db.ForeignKey('client.id'))
-    items = db.relationship('MenuItem', backref='reciept', lazy='dynamic')
+    items = db.relationship('ReceiptItem', backref='receipt', lazy='dynamic')
 
     def to_json(self):
         ret = {
@@ -15,6 +15,6 @@ class Receipt(db.Model):
             'datetime': self.datetime,
             'merchant_id': self.merchant_id,
             'client_id': self.client_id,
-            'items': map(self.items, lambda Receipt_item: menu_item.to_json())
+            'items': map(lambda Receipt_item: menu_item.to_json(), self.items)
         }
         return ret
