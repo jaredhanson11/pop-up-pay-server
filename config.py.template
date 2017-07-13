@@ -1,0 +1,4 @@
+# MySQL
+SQLALCHEMY_DATABASE_URI = 'mysql://[username]:[password]@[host]:[port]/[database]
+# SQLite
+SQLALCHEMY_DATABASE_URI = 'sqlite:///<path-to-sqlite-file>.db'
