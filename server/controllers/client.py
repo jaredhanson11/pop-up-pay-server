@@ -7,9 +7,10 @@ from ..utils import responses
 from ..models.client import Client
 from ..models.merchant import Merchant
 from ..models.receipt import Receipt
+from ..models.transaction import Transaction
 
-class ClientController(Resource):
-    def get(self, client_id, merchant_id):
+class ClientBuyController(Resource):
+    def get(self, client_id, merchant_id, transaction_id):
         '''
         Handles purchasing and setting receipts
         '''
@@ -37,5 +38,7 @@ class ClientController(Resource):
                 quantity = purchased_items.get(item)
                 new_receipt.add_item(_item_id, quantity)
                 purchased.append({_item.name: purchased_items.get(item)})
+
+        Transaction.create(transaction_id)
         return responses.success({'purchased': purchased, 'error': error})
 
