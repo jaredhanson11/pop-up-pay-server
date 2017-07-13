@@ -17,7 +17,7 @@ class Merchant(db.Model):
             'id': self.id,
             'name': self.name,
             'menu': map(lambda menu_item: menu_item.to_json(), self.menu),
-            'receipts': map(lambda reciepts_item: reciepts.to_json(), self.receipts)
+            'receipts': map(lambda receipt_item: receipt_item.to_json(), self.receipts)
         }
         return ret
 

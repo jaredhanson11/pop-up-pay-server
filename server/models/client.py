@@ -8,8 +8,8 @@ class Client(db.Model):
     receipts = db.relationship('Receipt', backref='client', lazy='dynamic')
 
     @staticmethod
-    def create(id, name):
-        new_client = Client(id, name)
+    def create(name):
+        new_client = Client(name=name)
         db.session.add(new_client)
         try:
             db.session.commit()
